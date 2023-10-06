@@ -1,5 +1,10 @@
 # AngularCommerce
 
+NOTE: Ensure the backend is cloned and db scripts are successfully ran before cloning the frontend
+
+
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.2.
 
 ## Development server
