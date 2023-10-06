@@ -1,0 +1,76 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="row"> <!--collection of css styles from the local style shhets and also some bootstrap styles-->
+
+
+                <!--loop over the collection of products-->
+
+                <div *ngFor="let tempProduct of products" class="col-md-3">
+                    <div class="product-box">
+
+                        <a routerLink="/products/{{ tempProduct.id  }}" >  <!--add a link/id on the link on the product image ro render in the url and make the i,age clickabel-->
+                        <img src="{{tempProduct.imageUrl}}" class="img-responsive">
+                    </a>
+
+                    <a routerLink="/products/{{ tempProduct.id  }}" >  <!--add a link on the product name-->
+                        <h1>{{tempProduct.name}}</h1>
+                        </a>
+
+                        <div class="price">{{tempProduct.unitPrice | currency:'USD' }} </div>
+                        <button (click)="addToCart(tempProduct)" class="btn btn-primary btn-sm"> Add to cart</button>
+                    </div>
+                </div>
+
+                <!--if products empty then display a message to the user-->
+                <!--TODO : add name given by user to tell what was not found-->
+                <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
+                    <!-- the '?' is a 'safe navigation operator' and guards against null and undefined values in property paths-->
+                    No products found.
+                </div>
+            </div>
+            <!--begin footer pagination componenet area-->
+
+            <div class="footer-pagination">
+                <div row="row">
+                    <div class="col-md-6"></div>
+
+                    <div class="col-md-6">
+                        <div row="row">
+                            <div class="col-md-9" style="padding-left: 30%">
+
+
+<!--oarameters of ngb-pagination componenet(left had side) (right side)-properties of ProductListComponenet-->
+                            <ngb-pagination [(page)]="thePageNumber"
+                                             [pageSize]="thePageSize"
+                                             [collectionSize]="theTotalElements"
+                                             [maxSize]="5"
+                                             [boundaryLinks]="true"
+                                             (pageChange)="listProducts()"> <!--event binfing(event:istening)page changing event call the listProduct method when user clicks a diffrent page
+                                            in the productList component and make sure it shows new data using based on this information -->
+                                             
+
+                            </ngb-pagination>
+
+                            </div>
+
+                            <div class="col-md-3 mt-2" style="text-align: right;">
+                            <span class="mr-2">Page Size</span>
+
+                                <select #myPageSelect (change)="updatePageSize(myPageSelect.value)">
+                                  <option  selected="true">5</option>
+                                  <option>10</option>
+                                  <option>20</option>
+                                  <option>50</option>
+                                </select>
+                               
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
